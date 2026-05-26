@@ -1,0 +1,6 @@
+{
+  "name": "BRIXA HOME & BUILD",
+  "description": "Futuristic luxury construction and architecture firm specializing in premium residential and commercial developments.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
