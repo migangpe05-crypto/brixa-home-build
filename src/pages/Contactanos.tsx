@@ -1,3 +1,4 @@
+import contactHero from '../assets/images/brixa_contact_3d_render_1779322352896.png';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { Send, MapPin, Phone, Mail, Instagram, Linkedin, Facebook, Compass, Hexagon, Share2 } from 'lucide-react';
 
@@ -29,7 +30,7 @@ export default function Contactanos() {
             className="w-full h-full"
           >
             <img 
-              src="/src/assets/images/brixa_contact_3d_render_1779322352896.png" 
+              src={contactHero}
               className="w-full h-full object-cover brightness-[0.6] contrast-[1.2]"
               alt="Brixa 3D Office Interior"
               referrerPolicy="no-referrer"
