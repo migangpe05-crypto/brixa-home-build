@@ -1,6 +1,10 @@
 import { motion, useScroll, useTransform, useInView, animate } from 'motion/react';
 import { Shield, Target, Award, Infinity, Users, Compass, Box } from 'lucide-react';
 import { useRef, useEffect, useState } from 'react';
+import nosotrosHero from '../assets/images/nosotros_premium_drone_shot_final_1779400154815.png';
+import historyBg from '../assets/images/brixa_history_construction_replicated_1779490894094.png';
+import missionBg from '../assets/images/brixa_mission_construction_1779488942951.png';
+import visionBg from '../assets/images/brixa_vision_cityscape_ultra_real_clean_1779504261648.png';
 
 const AnimatedNumber = ({ value }: { value: string }) => {
   const nodeRef = useRef(null);
@@ -40,7 +44,6 @@ export default function Nosotros() {
     <div className="bg-dark">
       {/* CINEMATIC PHILOSOPHY HERO */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden px-6">
-        {/* Background Drone Movement */}
         <motion.div 
           style={{ scale: heroScale, opacity: heroOpacity, y: yParallax }}
           className="absolute inset-0 z-0 overflow-hidden"
@@ -60,19 +63,16 @@ export default function Nosotros() {
             className="w-full h-full"
           >
             <img 
-              src="/src/assets/images/nosotros_premium_drone_shot_final_1779400154815.png" 
+              src={nosotrosHero}
               className="w-[110%] h-[110%] object-cover brightness-[0.7] contrast-[1.1] -translate-x-[5%] -translate-y-[5%]"
               alt="Brixa Philosophy Architectural Landscape"
-              referrerPolicy="no-referrer"
             />
           </motion.div>
           
-          {/* Gradients for Cinematic Feel */}
           <div className="absolute inset-0 bg-gradient-to-b from-dark/60 via-transparent to-dark" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(0,0,0,0.8)_100%)]" />
         </motion.div>
 
-        {/* Hero Content */}
         <div className="relative z-20 w-full max-w-7xl mx-auto flex items-center h-full px-8 pt-48 md:pt-80">
           <motion.div
             initial={{ opacity: 0, x: -60 }}
@@ -121,7 +121,6 @@ export default function Nosotros() {
           </motion.div>
         </div>
 
-        {/* Visual particles - subtle floating dust */}
         <div className="absolute inset-0 pointer-events-none z-10 opacity-10">
           {[...Array(20)].map((_, i) => (
             <motion.div
@@ -146,11 +145,11 @@ export default function Nosotros() {
         </div>
       </section>
 
-      {/* CORE CONTENT - HISTORIA WITH FULL BACKGROUND */}
+      {/* HISTORIA */}
       <section className="relative py-24 sm:py-48 px-6 bg-dark border-t border-white/5 overflow-hidden flex items-center justify-center">
         <div className="absolute inset-0 z-0">
           <img 
-            src="/src/assets/images/brixa_history_construction_replicated_1779490894094.png" 
+            src={historyBg}
             className="w-full h-full object-cover grayscale opacity-20 brightness-[0.4]"
             alt="Construction History Background"
           />
@@ -203,13 +202,12 @@ export default function Nosotros() {
         </div>
       </section>
 
-      {/* CORE VALUES - MISSION & VISION */}
+      {/* MISIÓN & VISIÓN */}
       <section className="py-32 bg-dark relative overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-primary/5 blur-[120px] pointer-events-none" />
         
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-stretch">
-            {/* MISIÓN CARD */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -225,7 +223,7 @@ export default function Nosotros() {
             >
               <div className="absolute inset-0 -z-10 opacity-30 group-hover:opacity-50 transition-opacity duration-700">
                 <img 
-                  src="/src/assets/images/brixa_mission_construction_1779488942951.png"
+                  src={missionBg}
                   className="w-full h-full object-cover grayscale brightness-50"
                   alt="Mission Background"
                 />
@@ -249,7 +247,6 @@ export default function Nosotros() {
               </p>
             </motion.div>
 
-            {/* VISIÓN CARD */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -265,7 +262,7 @@ export default function Nosotros() {
             >
               <div className="absolute inset-0 -z-10 opacity-30 group-hover:opacity-50 transition-opacity duration-700">
                 <img 
-                  src="/src/assets/images/brixa_vision_cityscape_ultra_real_clean_1779504261648.png"
+                  src={visionBg}
                   className="w-full h-full object-cover grayscale brightness-50"
                   alt="Vision Background"
                 />
