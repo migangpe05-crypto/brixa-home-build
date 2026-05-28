@@ -1,5 +1,11 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { Home, Building2, Hammer, Settings, TreePine, ArrowUpRight, Compass, Layers } from 'lucide-react';
+import serviciosHero from '../assets/images/servicios_construction_drone_final_1779400171800.png';
+import imgDesarrollo from '../assets/images/brixa_finished_house_replicated_1779490909196.png';
+import imgRemodelacion from '../assets/images/brixa_history_construction_replicated_1779490894094.png';
+import imgComercial from '../assets/images/brixa_commercial_interior_wood_beams_1779492112865.png';
+import imgMantenimiento from '../assets/images/brixa_maintenance_workers_construction_1779492128667.png';
+import imgCarpinteria from '../assets/images/luxury_carpentry_brixa_1779244089927.png';
 
 const services = [
   {
@@ -7,7 +13,7 @@ const services = [
     title: 'Desarrollo y Construcción',
     description: 'Diseño, planeación y ejecución de proyectos habitacionales y comerciales. Vivienda desde cero y edificación completa llave en mano.',
     icon: <Building2 className="w-10 h-10 text-primary" />,
-    img: '/src/assets/images/brixa_finished_house_replicated_1779490909196.png',
+    img: imgDesarrollo,
     details: ['Vivienda desde cero', 'Edificación completa', 'Proyectos llave en mano', 'Optimización de costos']
   },
   {
@@ -15,7 +21,7 @@ const services = [
     title: 'Remodelación y Optimización',
     description: 'Intervenciones para mejorar funcionalidad, estética y valor del inmueble. Remodelaciones integrales y optimización de espacios.',
     icon: <Home className="w-10 h-10 text-primary" />,
-    img: '/src/assets/images/brixa_history_construction_replicated_1779490894094.png',
+    img: imgRemodelacion,
     details: ['Remodelaciones integrales', 'Ampliaciones', 'Refuerzo estructural', 'Reconfiguración de espacios']
   },
   {
@@ -23,7 +29,7 @@ const services = [
     title: 'Proyectos Comerciales e Industriales',
     description: 'Soluciones para negocios y operación empresarial. Naves industriales, locales comerciales y domos estructurales.',
     icon: <Settings className="w-10 h-10 text-primary" />,
-    img: '/src/assets/images/brixa_commercial_interior_wood_beams_1779492112865.png',
+    img: imgComercial,
     details: ['Naves industriales', 'Locales comerciales', 'Domos estructurales', 'Adecuaciones para operación']
   },
   {
@@ -31,7 +37,7 @@ const services = [
     title: 'Servicios Técnicos y Mantenimiento',
     description: 'Solución de problemas y mantenimiento especializado preventivo de sistemas críticos para la operación.',
     icon: <Hammer className="w-10 h-10 text-primary" />,
-    img: '/src/assets/images/brixa_maintenance_workers_construction_1779492128667.png',
+    img: imgMantenimiento,
     details: ['Sistemas hidráulicos y eléctricos', 'Reparaciones estructurales menores', 'Mantenimiento preventivo', 'Consultoría técnica']
   }
 ];
@@ -46,18 +52,17 @@ export default function Servicios() {
     <div className="bg-dark">
       {/* CINEMATIC SERVICES HERO */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden px-6">
-        {/* Background Drone Movement */}
         <motion.div 
           style={{ scale: heroScale, opacity: heroOpacity, y: yParallax }}
           className="absolute inset-0 z-0"
         >
           <motion.div
             animate={{ 
-  x: [20, -20],
-  y: [-10, 10],
-  rotate: [-0.5, 0.5],
-  scale: [1.15, 1.25, 1.15]
-}}
+              x: [20, -20],
+              y: [-10, 10],
+              rotate: [-0.5, 0.5],
+              scale: [1.15, 1.25, 1.15]
+            }}
             transition={{ 
               duration: 20, 
               repeat: Infinity, 
@@ -66,10 +71,9 @@ export default function Servicios() {
             className="w-full h-full"
           >
             <img 
-              src="/src/assets/images/servicios_construction_drone_final_1779400171800.png" 
+              src={serviciosHero}
               className="w-full h-full object-cover brightness-[0.7] contrast-[1.1]"
               alt="Brixa 3D Architectural Detail"
-              referrerPolicy="no-referrer"
             />
           </motion.div>
           
@@ -77,7 +81,6 @@ export default function Servicios() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(0,0,0,0.8)_100%)]" />
         </motion.div>
 
-        {/* Hero Content - Standardized alignment and margins with top offset */}
         <div className="relative z-20 w-full max-w-7xl mx-auto flex items-center h-full px-8 pt-48 md:pt-80">
           <motion.div
             initial={{ opacity: 0, x: -60 }}
@@ -171,13 +174,11 @@ export default function Servicios() {
                 </button>
               </div>
 
-              {/* Hover Image Reveal */}
               <div className="absolute inset-0 opacity-0 group-hover:opacity-40 pointer-events-none transition-opacity duration-700">
                 <img 
                   src={service.img} 
                   className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-1000" 
                   alt={service.title} 
-                  referrerPolicy="no-referrer" 
                 />
               </div>
             </motion.div>
@@ -196,7 +197,7 @@ export default function Servicios() {
           <div className="relative flex flex-col lg:flex-row items-center gap-10 sm:gap-16 p-8 sm:p-12 lg:p-24 border border-white/5 backdrop-blur-2xl">
             <div className="flex-1 order-2 lg:order-1 lg:max-w-xl">
               <div className="flex items-center gap-4 mb-4 sm:mb-6">
-                <TreePine className="text-primary" size={20} sm:size={24} />
+                <TreePine className="text-primary" size={24} />
                 <span className="text-[8px] sm:text-[10px] uppercase tracking-[.3em] sm:tracking-[.5em] text-primary font-mono">CARPINTERÍA ARQUITECTÓNICA</span>
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl mb-6 sm:mb-8 uppercase tracking-tight leading-[0.9]">MANUFACTURA DE ALTO NIVEL</h2>
@@ -240,11 +241,10 @@ export default function Servicios() {
               }}
               className="flex-1 order-1 lg:order-2 relative aspect-[4/3] w-full overflow-hidden"
             >
-               <img 
-                src="/src/assets/images/luxury_carpentry_brixa_1779244089927.png" 
+              <img 
+                src={imgCarpinteria}
                 className="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-1000"
                 alt="Architecture Carpentry"
-                referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 border-[20px] border-dark/20 pointer-events-none" />
               <div className="absolute bottom-8 right-8 p-10 backdrop-blur-xl border-r-[1px] border-primary/40 md:block hidden text-right">
