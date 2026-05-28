@@ -7,24 +7,28 @@ import missionBg from '../assets/images/brixa_mission_construction_1779488942951
 import visionBg from '../assets/images/brixa_vision_cityscape_ultra_real_clean_1779504261648.png';
 
 const AnimatedNumber = ({ value }: { value: string }) => {
-  const nodeRef = useRef(null);
-  const isInView = useInView(nodeRef, { once: true, margin: "-100px" });
+  const nodeRef = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(nodeRef, { once: true, amount: 0.5 });
   const [displayValue, setDisplayValue] = useState(0);
   const numericValue = parseInt(value) || 0;
   const suffix = value.replace(/[0-9]/g, '');
 
   useEffect(() => {
-    if (isInView) {
-      const controls = animate(0, numericValue, {
-        duration: 2,
-        onUpdate: (latest) => setDisplayValue(Math.floor(latest)),
-        ease: "easeOut"
-      });
-      return () => controls.stop();
-    }
+    if (!isInView) return;
+    let start = 0;
+    const duration = 2000;
+    const step = (timestamp: number) => {
+      if (!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / duration, 1);
+      setDisplayValue(Math.floor(progress * numericValue));
+      if (progress < 1) requestAnimationFrame(step);
+      else setDisplayValue(numericValue);
+    };
+    requestAnimationFrame(step);
   }, [isInView, numericValue]);
 
   return <span ref={nodeRef}>{displayValue}{suffix}</span>;
+};
 };
 
 const stats = [
