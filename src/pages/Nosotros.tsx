@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform, useInView, animate } from 'motion/react';
+import { motion, useScroll, useTransform, useInView } from 'motion/react';
 import { Shield, Target, Award, Infinity, Users, Compass, Box } from 'lucide-react';
 import { useRef, useEffect, useState } from 'react';
 import nosotrosHero from '../assets/images/nosotros_premium_drone_shot_final_1779400154815.png';
@@ -8,34 +8,35 @@ import visionBg from '../assets/images/brixa_vision_cityscape_ultra_real_clean_1
 
 const AnimatedNumber = ({ value }: { value: string }) => {
   const nodeRef = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(nodeRef, { once: true, amount: 0.5 });
+  const isInView = useInView(nodeRef, { once: true, amount: 0.3 });
   const [displayValue, setDisplayValue] = useState(0);
   const numericValue = parseInt(value) || 0;
   const suffix = value.replace(/[0-9]/g, '');
 
   useEffect(() => {
     if (!isInView) return;
-    let start = 0;
     const duration = 2000;
-    const step = (timestamp: number) => {
-      if (!start) start = timestamp;
-      const progress = Math.min((timestamp - start) / duration, 1);
-      setDisplayValue(Math.floor(progress * numericValue));
-      if (progress < 1) requestAnimationFrame(step);
+    const startTime = performance.now();
+    const tick = (now: number) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setDisplayValue(Math.floor(eased * numericValue));
+      if (progress < 1) requestAnimationFrame(tick);
       else setDisplayValue(numericValue);
     };
-    requestAnimationFrame(step);
+    const raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
   }, [isInView, numericValue]);
 
   return <span ref={nodeRef}>{displayValue}{suffix}</span>;
 };
-};
 
 const stats = [
-  { label: 'Proyectos Realizados', value: '150+', icon: <Target className="text-primary" /> },
-  { label: 'Clientes Satisfechos', value: '450+', icon: <Users className="text-primary" /> },
+  { label: 'Proyectos Realizados', value: '75+', icon: <Target className="text-primary" /> },
+  { label: 'Clientes Satisfechos', value: '48+', icon: <Users className="text-primary" /> },
   { label: 'Años de Experiencia', value: '8', icon: <Infinity className="text-primary" /> },
-  { label: 'Proyectos Premium', value: '40+', icon: <Award className="text-primary" /> },
+  { label: 'Proyectos Premium', value: '20+', icon: <Award className="text-primary" /> },
 ];
 
 export default function Nosotros() {
