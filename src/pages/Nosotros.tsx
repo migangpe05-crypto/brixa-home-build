@@ -1,56 +1,33 @@
-import { motion, useScroll, useTransform } from 'motion/react';
-import { Shield, Target, Award, Infinity, Users } from 'lucide-react';
+import { motion, useScroll, useTransform, useInView, animate } from 'motion/react';
+import { Shield, Target, Award, Infinity, Users, Compass, Box } from 'lucide-react';
 import { useRef, useEffect, useState } from 'react';
-import nosotrosHero from '../assets/images/nosotros_premium_drone_shot_final_1779400154815.png';
-import historyBg from '../assets/images/brixa_history_construction_replicated_1779490894094.png';
-import missionBg from '../assets/images/brixa_mission_construction_1779488942951.png';
-import visionBg from '../assets/images/brixa_vision_cityscape_ultra_real_clean_1779504261648.png';
 
 const AnimatedNumber = ({ value }: { value: string }) => {
-  const nodeRef = useRef<HTMLSpanElement>(null);
+  const nodeRef = useRef(null);
+  const isInView = useInView(nodeRef, { once: true, margin: "-100px" });
   const [displayValue, setDisplayValue] = useState(0);
-  const [started, setStarted] = useState(false);
   const numericValue = parseInt(value) || 0;
   const suffix = value.replace(/[0-9]/g, '');
 
   useEffect(() => {
-    const el = nodeRef.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !started) {
-          setStarted(true);
-        }
-      },
-      { threshold: 0.3 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!started) return;
-    const duration = 2000;
-    const startTime = performance.now();
-    const tick = (now: number) => {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setDisplayValue(Math.floor(eased * numericValue));
-      if (progress < 1) requestAnimationFrame(tick);
-      else setDisplayValue(numericValue);
-    };
-    requestAnimationFrame(tick);
-  }, [started, numericValue]);
+    if (isInView) {
+      const controls = animate(0, numericValue, {
+        duration: 2,
+        onUpdate: (latest) => setDisplayValue(Math.floor(latest)),
+        ease: "easeOut"
+      });
+      return () => controls.stop();
+    }
+  }, [isInView, numericValue]);
 
   return <span ref={nodeRef}>{displayValue}{suffix}</span>;
 };
 
 const stats = [
-  { label: 'Proyectos Realizados', value: '75+', icon: <Target className="text-primary" /> },
-  { label: 'Clientes Satisfechos', value: '48+', icon: <Users className="text-primary" /> },
+  { label: 'Proyectos Realizados', value: '150+', icon: <Target className="text-primary" /> },
+  { label: 'Clientes Satisfechos', value: '450+', icon: <Users className="text-primary" /> },
   { label: 'Años de Experiencia', value: '8', icon: <Infinity className="text-primary" /> },
-  { label: 'Proyectos Premium', value: '20+', icon: <Award className="text-primary" /> },
+  { label: 'Proyectos Premium', value: '40+', icon: <Award className="text-primary" /> },
 ];
 
 export default function Nosotros() {
@@ -61,26 +38,41 @@ export default function Nosotros() {
 
   return (
     <div className="bg-dark">
+      {/* CINEMATIC PHILOSOPHY HERO */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden px-6">
+        {/* Background Drone Movement */}
         <motion.div 
           style={{ scale: heroScale, opacity: heroOpacity, y: yParallax }}
           className="absolute inset-0 z-0 overflow-hidden"
         >
           <motion.div
-            animate={{ x: [20, -20], y: [-10, 10], rotate: [-0.5, 0.5], scale: [1.15, 1.25, 1.15] }}
-            transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+            animate={{ 
+              x: [20, -20],
+              y: [-10, 10],
+              rotate: [-0.5, 0.5],
+              scale: [1.15, 1.25, 1.15]
+            }}
+            transition={{ 
+              duration: 20, 
+              repeat: Infinity, 
+              ease: "easeInOut"
+            }}
             className="w-full h-full"
           >
             <img 
-              src={nosotrosHero}
+              src="/src/assets/images/nosotros_premium_drone_shot_final_1779400154815.png" 
               className="w-[110%] h-[110%] object-cover brightness-[0.7] contrast-[1.1] -translate-x-[5%] -translate-y-[5%]"
               alt="Brixa Philosophy Architectural Landscape"
+              referrerPolicy="no-referrer"
             />
           </motion.div>
+          
+          {/* Gradients for Cinematic Feel */}
           <div className="absolute inset-0 bg-gradient-to-b from-dark/60 via-transparent to-dark" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(0,0,0,0.8)_100%)]" />
         </motion.div>
 
+        {/* Hero Content */}
         <div className="relative z-20 w-full max-w-7xl mx-auto flex items-center h-full px-8 pt-48 md:pt-80">
           <motion.div
             initial={{ opacity: 0, x: -60 }}
@@ -98,6 +90,7 @@ export default function Nosotros() {
                 EXPERIENCIA
               </motion.span>
             </div>
+            
             <div className="mb-10 md:mb-16 relative">
               <motion.h1 
                 initial={{ y: 100, opacity: 0 }}
@@ -108,6 +101,7 @@ export default function Nosotros() {
                 QUIÉNES <span className="text-primary">SOMOS</span>
               </motion.h1>
             </div>
+            
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
@@ -127,22 +121,39 @@ export default function Nosotros() {
           </motion.div>
         </div>
 
+        {/* Visual particles - subtle floating dust */}
         <div className="absolute inset-0 pointer-events-none z-10 opacity-10">
           {[...Array(20)].map((_, i) => (
             <motion.div
               key={i}
               className="absolute w-1 h-1 bg-white rounded-full"
-              initial={{ x: Math.random() * 100 + "%", y: Math.random() * 100 + "%", opacity: Math.random() }}
-              animate={{ y: [null, Math.random() * 100 + "%"], opacity: [0, 0.5, 0] }}
-              transition={{ duration: 10 + Math.random() * 10, repeat: Infinity, ease: "linear" }}
+              initial={{ 
+                x: Math.random() * 100 + "%", 
+                y: Math.random() * 100 + "%",
+                opacity: Math.random()
+              }}
+              animate={{ 
+                y: [null, Math.random() * 100 + "%"],
+                opacity: [0, 0.5, 0]
+              }}
+              transition={{ 
+                duration: 10 + Math.random() * 10, 
+                repeat: Infinity,
+                ease: "linear"
+              }}
             />
           ))}
         </div>
       </section>
 
+      {/* CORE CONTENT - HISTORIA WITH FULL BACKGROUND */}
       <section className="relative py-24 sm:py-48 px-6 bg-dark border-t border-white/5 overflow-hidden flex items-center justify-center">
         <div className="absolute inset-0 z-0">
-          <img src={historyBg} className="w-full h-full object-cover grayscale opacity-20 brightness-[0.4]" alt="Construction History Background" />
+          <img 
+            src="/src/assets/images/brixa_history_construction_replicated_1779490894094.png" 
+            className="w-full h-full object-cover grayscale opacity-20 brightness-[0.4]"
+            alt="Construction History Background"
+          />
           <div className="absolute inset-0 bg-gradient-to-b from-dark via-transparent to-dark" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(0,0,0,0.8)_100%)]" />
         </div>
@@ -192,59 +203,87 @@ export default function Nosotros() {
         </div>
       </section>
 
+      {/* CORE VALUES - MISSION & VISION */}
       <section className="py-32 bg-dark relative overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-primary/5 blur-[120px] pointer-events-none" />
+        
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+            {/* MISIÓN CARD */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              whileHover={{ y: -10, backgroundColor: 'rgba(255, 255, 255, 0.05)', borderColor: 'rgba(166, 15, 31, 0.4)', boxShadow: '0 20px 40px -20px rgba(166, 15, 31, 0.3)' }}
+              whileHover={{ 
+                y: -10,
+                backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                borderColor: 'rgba(166, 15, 31, 0.4)',
+                boxShadow: '0 20px 40px -20px rgba(166, 15, 31, 0.3)'
+              }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="group flex flex-col items-center text-center p-8 sm:p-10 lg:p-16 bg-white/[0.02] backdrop-blur-xl border border-primary/10 rounded-sm transition-all duration-500 h-full relative overflow-hidden"
             >
               <div className="absolute inset-0 -z-10 opacity-30 group-hover:opacity-50 transition-opacity duration-700">
-                <img src={missionBg} className="w-full h-full object-cover grayscale brightness-50" alt="Mission Background" />
+                <img 
+                  src="/src/assets/images/brixa_mission_construction_1779488942951.png"
+                  className="w-full h-full object-cover grayscale brightness-50"
+                  alt="Mission Background"
+                />
               </div>
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none bg-[radial-gradient(circle_at_50%_0%,rgba(166,15,31,0.2),transparent_70%)]" />
+              
               <div className="relative mb-6 sm:mb-10">
                 <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary/10 flex items-center justify-center text-primary border border-primary/20 rotate-45 group-hover:rotate-0 transition-transform duration-700">
                   <Target size={24} className="-rotate-45 group-hover:rotate-0 transition-transform duration-700" />
                 </div>
                 <div className="absolute -inset-2 bg-primary/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
               </div>
+              
               <h3 className="text-2xl sm:text-3xl font-display text-white uppercase tracking-[0.2em] mb-6 sm:mb-8 relative">
                 MISIÓN
                 <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-10 h-[2px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
               </h3>
+              
               <p className="text-white text-sm sm:text-lg font-content leading-relaxed max-w-md relative z-10 px-2 sm:px-0">
                 En <strong>BRIXA HOME & BUILD</strong> desarrollamos y construimos proyectos inmobiliarios eficientes, transformando tierra en activos habitables y rentables, mediante procesos estructurados, control de costos y ejecución confiable con eficiencia operativa y alto retorno para clientes e inversionistas.
               </p>
             </motion.div>
 
+            {/* VISIÓN CARD */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              whileHover={{ y: -10, backgroundColor: 'rgba(255, 255, 255, 0.05)', borderColor: 'rgba(166, 15, 31, 0.4)', boxShadow: '0 20px 40px -20px rgba(166, 15, 31, 0.3)' }}
+              whileHover={{ 
+                y: -10,
+                backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                borderColor: 'rgba(166, 15, 31, 0.4)',
+                boxShadow: '0 20px 40px -20px rgba(166, 15, 31, 0.3)'
+              }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
               className="group flex flex-col items-center text-center p-8 sm:p-10 lg:p-16 bg-white/[0.02] backdrop-blur-xl border border-primary/10 rounded-sm transition-all duration-500 h-full relative overflow-hidden"
             >
               <div className="absolute inset-0 -z-10 opacity-30 group-hover:opacity-50 transition-opacity duration-700">
-                <img src={visionBg} className="w-full h-full object-cover grayscale brightness-50" alt="Vision Background" />
+                <img 
+                  src="/src/assets/images/brixa_vision_cityscape_ultra_real_clean_1779504261648.png"
+                  className="w-full h-full object-cover grayscale brightness-50"
+                  alt="Vision Background"
+                />
               </div>
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none bg-[radial-gradient(circle_at_50%_0%,rgba(166,15,31,0.2),transparent_70%)]" />
+
               <div className="relative mb-6 sm:mb-10">
                 <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary/10 flex items-center justify-center text-primary border border-primary/20 rotate-45 group-hover:rotate-0 transition-transform duration-700">
                   <Shield size={24} className="-rotate-45 group-hover:rotate-0 transition-transform duration-700" />
                 </div>
                 <div className="absolute -inset-2 bg-primary/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
               </div>
+              
               <h3 className="text-2xl sm:text-3xl font-display text-white uppercase tracking-[0.2em] mb-6 sm:mb-8 relative">
                 VISIÓN
                 <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-10 h-[2px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
               </h3>
+              
               <p className="text-white text-sm sm:text-lg font-content leading-relaxed max-w-md relative z-10 px-2 sm:px-0">
                 Posicionar a <strong>BRIXA HOME & BUILD</strong> como una desarrolladora líder en Puebla, especializada en proyectos accesibles y escalables, financiados estratégicamente. Destacar por su calidad, transparencia y capacidad de generar patrimonio y valor urbano.
               </p>

@@ -1,62 +1,46 @@
+import React from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
-import { Send, MapPin, Phone, Mail, Instagram, Facebook, Share2 } from 'lucide-react';
-import { useRef, useState } from 'react';
-import emailjs from '@emailjs/browser';
-import contactHero from '../assets/images/brixa_contact_3d_render_1779322352896.png';
-
-const SERVICE_ID = 'Brixa_service';
-const TEMPLATE_ID = 'purozkh';
-const PUBLIC_KEY = 'CT8vHMvF_EB1YxGc_';
+import { Send, MapPin, Phone, Mail, Facebook, Instagram, Share2 } from 'lucide-react';
 
 export default function Contactanos() {
   const { scrollYProgress } = useScroll();
   const heroScale = useTransform(scrollYProgress, [0, 0.3], [1, 1.2]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
 
-  const formRef = useRef<HTMLFormElement>(null);
-  const [sending, setSending] = useState(false);
-  const [sent, setSent] = useState(false);
-  const [error, setError] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formRef.current) return;
-    setSending(true);
-    setError(false);
-    try {
-      await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, PUBLIC_KEY);
-      setSent(true);
-      formRef.current.reset();
-    } catch (err) {
-      setError(true);
-    } finally {
-      setSending(false);
-    }
-  };
-
   return (
     <div className="bg-dark">
       {/* CINEMATIC CONTACT HERO */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden px-6">
+        {/* Background Drone Movement */}
         <motion.div 
           style={{ scale: heroScale, opacity: heroOpacity }}
           className="absolute inset-0 z-0"
         >
           <motion.div
-            animate={{ x: [-50, 50], y: [-20, 20], scale: [1.1, 1.3, 1.1] }}
-            transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+            animate={{ 
+              x: [-50, 50],
+              y: [-20, 20],
+              scale: [1.1, 1.3, 1.1]
+            }}
+            transition={{ 
+              duration: 25, 
+              repeat: Infinity, 
+              ease: "easeInOut" 
+            }}
             className="w-full h-full"
           >
             <img 
-              src={contactHero}
+              src="/src/assets/images/brixa_contact_3d_render_1779322352896.png" 
               className="w-full h-full object-cover brightness-[0.6] contrast-[1.2]"
               alt="Brixa 3D Office Interior"
+              referrerPolicy="no-referrer"
             />
           </motion.div>
           <div className="absolute inset-0 bg-gradient-to-b from-dark/70 via-transparent to-dark" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(0,0,0,0.8)_100%)]" />
         </motion.div>
 
+        {/* Hero Content - Standardized alignment and margins with top offset */}
         <div className="relative z-20 w-full max-w-7xl mx-auto flex items-center h-full px-8 pt-48 md:pt-80">
           <motion.div
             initial={{ opacity: 0, x: -60 }}
@@ -74,6 +58,7 @@ export default function Contactanos() {
                 CONEXIÓN
               </motion.span>
             </div>
+            
             <div className="mb-10 md:mb-16 relative">
               <motion.h1 
                 initial={{ y: 100, opacity: 0 }}
@@ -84,6 +69,7 @@ export default function Contactanos() {
                 ESTAMOS <span className="text-primary">LISTOS</span>
               </motion.h1>
             </div>
+            
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
@@ -121,6 +107,7 @@ export default function Contactanos() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-12">
+              {/* UBICACION */}
               <div className="space-y-3 sm:space-y-4 group">
                 <div className="flex items-center gap-4 text-primary">
                   <MapPin size={18} />
@@ -137,16 +124,23 @@ export default function Contactanos() {
                 </a>
               </div>
 
+              {/* WHATSAPP */}
               <div className="space-y-3 sm:space-y-4 group">
                 <div className="flex items-center gap-4 text-primary">
                   <Phone size={18} />
-                  <span className="text-[8px] sm:text-[10px] uppercase tracking-[.2em] sm:tracking-[.3em] font-mono">Llamada Directa</span>
+                  <span className="text-[8px] sm:text-[10px] uppercase tracking-[.2em] sm:tracking-[.3em] font-mono">WhatsApp Directo</span>
                 </div>
-                <p className="text-white/80 font-mono text-xs sm:text-sm leading-relaxed border-l border-white/10 pl-6 group-hover:border-primary transition-colors">
+                <a 
+                  href="https://wa.me/522223028042"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/80 font-mono text-xs sm:text-sm leading-relaxed border-l border-white/10 pl-6 group-hover:border-primary transition-colors block"
+                >
                   +52 222 302 8042
-                </p>
+                </a>
               </div>
 
+              {/* CORREO */}
               <div className="space-y-3 sm:space-y-4 group">
                 <div className="flex items-center gap-4 text-primary">
                   <Mail size={18} />
@@ -160,10 +154,11 @@ export default function Contactanos() {
                 </a>
               </div>
 
+              {/* REDES */}
               <div className="space-y-3 sm:space-y-4 group">
                 <div className="flex items-center gap-4 text-primary">
                   <Share2 size={18} />
-                  <span className="text-[8px] sm:text-[10px] uppercase tracking-[.2em] sm:tracking-[.3em] font-mono">REDES SOCIALES</span>
+                  <span className="text-[8px] sm:text-[10px] uppercase tracking-[.2em] sm:tracking-[.3em] font-mono">SÍGUENOS</span>
                 </div>
                 <div className="flex gap-4 border-l border-white/10 pl-6 group-hover:border-primary transition-colors">
                   {[
@@ -197,7 +192,7 @@ export default function Contactanos() {
             </div>
           </motion.div>
 
-          {/* FORM SECTION */}
+          {/* FORM SECTION - WHATSAPP PROFESIONAL */}
           <motion.div
             id="quote-form"
             initial={{ opacity: 0, y: 30 }}
@@ -205,94 +200,107 @@ export default function Contactanos() {
             viewport={{ once: true }}
             className="relative p-6 sm:p-10 lg:p-14 bg-white/[0.02] border border-white/5 backdrop-blur-3xl overflow-hidden"
           >
+            {/* Fondo Cinemático */}
             <div className="absolute top-0 right-0 w-40 h-40 bg-primary/5 blur-[100px] pointer-events-none" />
-            
-            {sent ? (
-              <div className="flex flex-col items-center justify-center py-20 gap-6 text-center">
-                <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center">
-                  <Send size={28} className="text-primary" />
-                </div>
-                <h3 className="font-display text-2xl sm:text-3xl uppercase tracking-widest text-white">¡Solicitud Enviada!</h3>
-                <p className="text-white/60 font-content">Nuestro equipo se pondrá en contacto contigo pronto.</p>
-                <button
-                  onClick={() => setSent(false)}
-                  className="mt-4 px-8 py-3 border border-primary/40 text-primary font-mono text-xs uppercase tracking-widest hover:bg-primary hover:text-white transition-all"
-                >
-                  Enviar otra solicitud
-                </button>
-              </div>
-            ) : (
-              <form ref={formRef} className="space-y-8 sm:space-y-10 relative z-10" onSubmit={handleSubmit}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
-                  <div className="space-y-4">
-                    <label className="text-[8px] sm:text-[10px] uppercase tracking-[.4em] text-primary font-semibold">Nombre Completo</label>
-                    <input 
-                      required
-                      name="name"
-                      type="text" 
-                      placeholder="Tu nombre"
-                      className="w-full bg-white/[0.03] border-b border-white/20 p-4 sm:p-5 outline-none focus:border-primary transition-all font-content text-white placeholder:text-white/20 text-sm sm:text-base"
-                    />
-                  </div>
-                  <div className="space-y-4">
-                    <label className="text-[8px] sm:text-[10px] uppercase tracking-[.4em] text-primary font-semibold">Correo</label>
-                    <input 
-                      required
-                      name="email"
-                      type="email" 
-                      placeholder="ejemplo@dominio.com"
-                      className="w-full bg-white/[0.03] border-b border-white/20 p-4 sm:p-5 outline-none focus:border-primary transition-all font-content text-white placeholder:text-white/20 text-sm sm:text-base"
-                    />
-                  </div>
-                </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
-                  <div className="space-y-3">
-                    <label className="text-[8px] sm:text-[9px] uppercase tracking-[.4em] text-primary/80 font-mono">Teléfono</label>
-                    <input 
-                      required
-                      name="phone"
-                      type="tel" 
-                      className="w-full bg-white/5 border-b border-white/10 p-4 outline-none focus:border-primary transition-all font-content text-white text-sm sm:text-base"
-                    />
-                  </div>
-                  <div className="space-y-3">
-                    <label className="text-[8px] sm:text-[9px] uppercase tracking-[.4em] text-primary/80 font-mono">Inversión Estimada</label>
-                    <select name="investment" className="w-full bg-white/5 border-b border-white/10 p-4 outline-none focus:border-primary transition-all font-content text-white/60 appearance-none text-sm sm:text-base">
-                      <option className="bg-dark">$500k - $1M</option>
-                      <option className="bg-dark">$1M - $5M</option>
-                      <option className="bg-dark">$5M+</option>
-                    </select>
-                  </div>
-                </div>
+            <form
+              className="space-y-8 sm:space-y-10 relative z-10"
+              onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
+                e.preventDefault();
+                const form = e.currentTarget;
+                const nombre = (form[0] as HTMLInputElement).value;
+                const correo = (form[1] as HTMLInputElement).value;
+                const telefono = (form[2] as HTMLInputElement).value;
+                const inversion = (form[3] as HTMLSelectElement).value;
+                const proyecto = (form[4] as HTMLTextAreaElement).value;
 
-                <div className="space-y-3">
-                  <label className="text-[8px] sm:text-[9px] uppercase tracking-[.4em] text-primary/80 font-mono">Proyecto / Idea</label>
-                  <textarea 
+                const mensaje = `🏗️ NUEVA SOLICITUD DE COTIZACIÓN — BRIXA HOME & BUILD\n\n━━━━━━━━━━━━━━━\n\n👤 Nombre:\n${nombre}\n\n📧 Correo:\n${correo}\n\n📱 Teléfono:\n${telefono}\n\n💰 Presupuesto estimado:\n${inversion}\n\n📝 Detalles del proyecto:\n${proyecto}\n\n━━━━━━━━━━━━━━━\n\nGracias por contactar a BRIXA HOME & BUILD.\n\nUno de nuestros asesores especializados revisará tu solicitud y se pondrá en contacto contigo a la brevedad.`.trim();
+
+                const numero = "522223028042";
+                const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+                window.open(url, "_blank");
+              }}
+            >
+              {/* NOMBRE Y CORREO */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+                <div className="space-y-4">
+                  <label className="text-[8px] sm:text-[10px] uppercase tracking-[.4em] text-primary font-semibold">
+                    Nombre Completo
+                  </label>
+                  <input
                     required
-                    name="message"
-                    rows={4} 
-                    className="w-full bg-white/5 border border-white/10 p-4 outline-none focus:border-primary transition-all font-content text-white resize-none text-sm sm:text-base"
+                    type="text"
+                    placeholder="Tu nombre completo"
+                    className="w-full bg-white/[0.03] border-b border-white/20 p-4 sm:p-5 outline-none focus:border-primary transition-all font-content text-white placeholder:text-white/20 text-sm sm:text-base"
                   />
                 </div>
 
-                {error && (
-                  <p className="text-red-400 text-xs font-mono uppercase tracking-widest">
-                    Error al enviar. Intenta de nuevo o contáctanos por WhatsApp.
-                  </p>
-                )}
+                <div className="space-y-4">
+                  <label className="text-[8px] sm:text-[10px] uppercase tracking-[.4em] text-primary font-semibold">
+                    Correo Electrónico
+                  </label>
+                  <input
+                    required
+                    type="email"
+                    placeholder="ejemplo@correo.com"
+                    className="w-full bg-white/[0.03] border-b border-white/20 p-4 sm:p-5 outline-none focus:border-primary transition-all font-content text-white placeholder:text-white/20 text-sm sm:text-base"
+                  />
+                </div>
+              </div>
 
-                <motion.button
-                  type="submit"
-                  disabled={sending}
-                  whileHover={{ scale: sending ? 1 : 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full py-4 sm:py-6 bg-primary text-white font-display text-base sm:text-xl tracking-[0.2em] sm:tracking-[0.3em] uppercase flex items-center justify-center gap-4 transition-all shadow-2xl disabled:opacity-60"
-                >
-                  {sending ? 'Enviando...' : 'Solicitar Cotización'} <Send size={18} />
-                </motion.button>
-              </form>
-            )}
+              {/* TELEFONO E INVERSION */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+                <div className="space-y-3">
+                  <label className="text-[8px] sm:text-[9px] uppercase tracking-[.4em] text-primary/80 font-mono">
+                    Número Telefónico
+                  </label>
+                  <input
+                    required
+                    type="tel"
+                    placeholder="+52 222 000 0000"
+                    className="w-full bg-white/5 border-b border-white/10 p-4 outline-none focus:border-primary transition-all font-content text-white text-sm sm:text-base"
+                  />
+                </div>
+
+                <div className="space-y-3">
+                  <label className="text-[8px] sm:text-[9px] uppercase tracking-[.4em] text-primary/80 font-mono">
+                    Presupuesto Estimado
+                  </label>
+                  <select className="w-full bg-white/5 border-b border-white/10 p-4 outline-none focus:border-primary transition-all font-content text-white appearance-none text-sm sm:text-base">
+                    <option className="bg-dark">$500,000 MXN - $1,000,000 MXN</option>
+                    <option className="bg-dark">$1,000,000 MXN - $5,000,000 MXN</option>
+                    <option className="bg-dark">$5,000,000 MXN+</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* PROYECTO */}
+              <div className="space-y-3">
+                <label className="text-[8px] sm:text-[9px] uppercase tracking-[.4em] text-primary/80 font-mono">
+                  Detalles de tu Proyecto
+                </label>
+                <textarea
+                  required
+                  rows={4}
+                  placeholder="Cuéntanos más sobre tu proyecto, idea o requerimientos..."
+                  className="w-full bg-white/5 border border-white/10 p-4 outline-none focus:border-primary transition-all font-content text-white resize-none text-sm sm:text-base placeholder:text-white/20"
+                />
+              </div>
+
+              {/* BOTON */}
+              <motion.button
+                type="submit"
+                whileHover={{
+                  scale: 1.02,
+                  backgroundColor: "#25D366",
+                }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full py-4 sm:py-6 bg-primary text-white font-display text-base sm:text-xl tracking-[0.2em] sm:tracking-[0.3em] uppercase flex items-center justify-center gap-4 transition-all duration-300 shadow-2xl"
+              >
+                Solicitar Asesoría Privada
+                <Send size={18} />
+              </motion.button>
+            </form>
           </motion.div>
         </div>
 
@@ -309,31 +317,19 @@ export default function Contactanos() {
           <div className="absolute inset-0 bg-[url('https://picsum.photos/seed/puebla_map/1920/800')] bg-cover grayscale contrast-150 opacity-10 group-hover:scale-110 transition-transform duration-1000" />
           <div className="absolute inset-0 bg-gradient-to-t from-dark to-transparent" />
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="flex flex-col items-center gap-6">
-              <div className="w-16 h-16 bg-primary rounded-full animate-ping absolute opacity-10" />
-              <div className="w-6 h-6 bg-primary rounded-full relative z-10 shadow-[0_0_30px_#A60F1F] flex items-center justify-center">
-                <div className="w-2 h-2 bg-white rounded-full" />
-              </div>
-              <div className="text-center group-hover:translate-y-[-10px] transition-transform">
-                <span className="font-display text-3xl tracking-[0.6em] text-white block uppercase">Puebla</span>
-                <span className="text-[10px] text-primary uppercase tracking-[0.5em] mt-2 block opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Ver en Google Maps</span>
-              </div>
-            </div>
+             <div className="flex flex-col items-center gap-6">
+                <div className="w-16 h-16 bg-primary rounded-full animate-ping absolute opacity-10" />
+                <div className="w-6 h-6 bg-primary rounded-full relative z-10 shadow-[0_0_30px_#A60F1F] flex items-center justify-center">
+                  <div className="w-2 h-2 bg-white rounded-full" />
+                </div>
+                <div className="text-center group-hover:translate-y-[-10px] transition-transform">
+                  <span className="font-display text-3xl tracking-[0.6em] text-white block uppercase">Puebla</span>
+                  <span className="text-[10px] text-primary uppercase tracking-[0.5em] mt-2 block opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Ver en Google Maps</span>
+                </div>
+             </div>
           </div>
         </motion.a>
       </section>
-
-      {/* WHATSAPP FLOAT */}
-      <motion.a
-        href="https://wa.me/522223028042"
-        target="_blank"
-        rel="noopener noreferrer"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        className="fixed bottom-6 right-6 sm:bottom-10 sm:right-10 w-12 h-12 sm:w-16 sm:h-16 bg-[#25D366] rounded-full flex items-center justify-center shadow-2xl z-40"
-      >
-        <Phone size={24} className="text-white fill-current" />
-      </motion.a>
     </div>
   );
 }
