@@ -1,6 +1,9 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { ChevronDown, Globe, Cpu, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import cyberHero from '../assets/images/brixa_cyber_hero_cinematic_1779247366665.png';
+import groundedHero from '../assets/images/brixa_grounded_hero_v2_1779246974147.png';
+import structuralPrecision from '../assets/images/brixa_structural_precision_clean_v3_1779511204879.png';
 
 export default function Inicio() {
   const { scrollYProgress } = useScroll();
@@ -35,10 +38,9 @@ export default function Inicio() {
             className="w-full h-full"
           >
             <img 
-              src="/src/assets/images/brixa_cyber_hero_cinematic_1779247366665.png" 
+              src={cyberHero}
               className="w-full h-full object-cover brightness-[0.8] contrast-[1.2] scale-110"
               alt="Brixa Futuristic Hub"
-              referrerPolicy="no-referrer"
             />
           </motion.div>
           
@@ -122,10 +124,9 @@ export default function Inicio() {
             className="absolute inset-0"
           >
             <img 
-              src="/src/assets/images/brixa_grounded_hero_v2_1779246974147.png" 
+              src={groundedHero}
               className="w-full h-full object-cover grayscale opacity-20 transition-all duration-1000"
               alt="Luxury Development"
-              referrerPolicy="no-referrer"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-dark via-transparent to-dark" />
             
@@ -201,10 +202,9 @@ export default function Inicio() {
               <motion.img 
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 1 }}
-                src="/src/assets/images/brixa_structural_precision_clean_v3_1779511204879.png"
+                src={structuralPrecision}
                 className="w-full h-full object-cover"
                 alt="Construction Site"
-                referrerPolicy="no-referrer"
               />
             </div>
             <div className="absolute bottom-10 -left-10 p-10 backdrop-blur-xl border-l-[1px] border-primary/40 md:block hidden">
