@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { Send, MapPin, Phone, Mail, Facebook, Instagram, Share2 } from 'lucide-react';
+import contactHero from '../assets/images/brixa_contact_3d_render_1779322352896.png';
 
 export default function Contactanos() {
   const { scrollYProgress } = useScroll();
@@ -11,7 +12,6 @@ export default function Contactanos() {
     <div className="bg-dark">
       {/* CINEMATIC CONTACT HERO */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden px-6">
-        {/* Background Drone Movement */}
         <motion.div 
           style={{ scale: heroScale, opacity: heroOpacity }}
           className="absolute inset-0 z-0"
@@ -30,17 +30,15 @@ export default function Contactanos() {
             className="w-full h-full"
           >
             <img 
-              src="/src/assets/images/brixa_contact_3d_render_1779322352896.png" 
+              src={contactHero}
               className="w-full h-full object-cover brightness-[0.6] contrast-[1.2]"
               alt="Brixa 3D Office Interior"
-              referrerPolicy="no-referrer"
             />
           </motion.div>
           <div className="absolute inset-0 bg-gradient-to-b from-dark/70 via-transparent to-dark" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(0,0,0,0.8)_100%)]" />
         </motion.div>
 
-        {/* Hero Content - Standardized alignment and margins with top offset */}
         <div className="relative z-20 w-full max-w-7xl mx-auto flex items-center h-full px-8 pt-48 md:pt-80">
           <motion.div
             initial={{ opacity: 0, x: -60 }}
@@ -107,7 +105,6 @@ export default function Contactanos() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-12">
-              {/* UBICACION */}
               <div className="space-y-3 sm:space-y-4 group">
                 <div className="flex items-center gap-4 text-primary">
                   <MapPin size={18} />
@@ -124,7 +121,6 @@ export default function Contactanos() {
                 </a>
               </div>
 
-              {/* WHATSAPP */}
               <div className="space-y-3 sm:space-y-4 group">
                 <div className="flex items-center gap-4 text-primary">
                   <Phone size={18} />
@@ -140,7 +136,6 @@ export default function Contactanos() {
                 </a>
               </div>
 
-              {/* CORREO */}
               <div className="space-y-3 sm:space-y-4 group">
                 <div className="flex items-center gap-4 text-primary">
                   <Mail size={18} />
@@ -154,7 +149,6 @@ export default function Contactanos() {
                 </a>
               </div>
 
-              {/* REDES */}
               <div className="space-y-3 sm:space-y-4 group">
                 <div className="flex items-center gap-4 text-primary">
                   <Share2 size={18} />
@@ -192,7 +186,7 @@ export default function Contactanos() {
             </div>
           </motion.div>
 
-          {/* FORM SECTION - WHATSAPP PROFESIONAL */}
+          {/* FORM SECTION */}
           <motion.div
             id="quote-form"
             initial={{ opacity: 0, y: 30 }}
@@ -200,7 +194,6 @@ export default function Contactanos() {
             viewport={{ once: true }}
             className="relative p-6 sm:p-10 lg:p-14 bg-white/[0.02] border border-white/5 backdrop-blur-3xl overflow-hidden"
           >
-            {/* Fondo Cinemático */}
             <div className="absolute top-0 right-0 w-40 h-40 bg-primary/5 blur-[100px] pointer-events-none" />
 
             <form
@@ -214,14 +207,13 @@ export default function Contactanos() {
                 const inversion = (form[3] as HTMLSelectElement).value;
                 const proyecto = (form[4] as HTMLTextAreaElement).value;
 
-                const mensaje = `🏗️ NUEVA SOLICITUD DE COTIZACIÓN — BRIXA HOME & BUILD\n\n━━━━━━━━━━━━━━━\n\n👤 Nombre:\n${nombre}\n\n📧 Correo:\n${correo}\n\n📱 Teléfono:\n${telefono}\n\n💰 Presupuesto estimado:\n${inversion}\n\n📝 Detalles del proyecto:\n${proyecto}\n\n━━━━━━━━━━━━━━━\n\nGracias por contactar a BRIXA HOME & BUILD.\n\nUno de nuestros asesores especializados revisará tu solicitud y se pondrá en contacto contigo a la brevedad.`.trim();
+                const mensaje = `🏗️ NUEVA SOLICITUD DE COTIZACIÓN — BRIXA HOME & BUILD\n\n━━━━━━━━━━━━━━━\n\n👤 Nombre:\n${nombre}\n\n📧 Correo:\n${correo}\n\n📱 Teléfono:\n${telefono}\n\n💰 Presupuesto estimado:\n${inversion}\n\n📝 Detalles del proyecto:\n${proyecto}\n\n━━━━━━━━━━━━━━━`.trim();
 
                 const numero = "522223028042";
                 const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
                 window.open(url, "_blank");
               }}
             >
-              {/* NOMBRE Y CORREO */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
                 <div className="space-y-4">
                   <label className="text-[8px] sm:text-[10px] uppercase tracking-[.4em] text-primary font-semibold">
@@ -248,7 +240,6 @@ export default function Contactanos() {
                 </div>
               </div>
 
-              {/* TELEFONO E INVERSION */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
                 <div className="space-y-3">
                   <label className="text-[8px] sm:text-[9px] uppercase tracking-[.4em] text-primary/80 font-mono">
@@ -274,7 +265,6 @@ export default function Contactanos() {
                 </div>
               </div>
 
-              {/* PROYECTO */}
               <div className="space-y-3">
                 <label className="text-[8px] sm:text-[9px] uppercase tracking-[.4em] text-primary/80 font-mono">
                   Detalles de tu Proyecto
@@ -287,13 +277,9 @@ export default function Contactanos() {
                 />
               </div>
 
-              {/* BOTON */}
               <motion.button
                 type="submit"
-                whileHover={{
-                  scale: 1.02,
-                  backgroundColor: "#25D366",
-                }}
+                whileHover={{ scale: 1.02, backgroundColor: "#25D366" }}
                 whileTap={{ scale: 0.98 }}
                 className="w-full py-4 sm:py-6 bg-primary text-white font-display text-base sm:text-xl tracking-[0.2em] sm:tracking-[0.3em] uppercase flex items-center justify-center gap-4 transition-all duration-300 shadow-2xl"
               >
@@ -317,19 +303,32 @@ export default function Contactanos() {
           <div className="absolute inset-0 bg-[url('https://picsum.photos/seed/puebla_map/1920/800')] bg-cover grayscale contrast-150 opacity-10 group-hover:scale-110 transition-transform duration-1000" />
           <div className="absolute inset-0 bg-gradient-to-t from-dark to-transparent" />
           <div className="absolute inset-0 flex items-center justify-center">
-             <div className="flex flex-col items-center gap-6">
-                <div className="w-16 h-16 bg-primary rounded-full animate-ping absolute opacity-10" />
-                <div className="w-6 h-6 bg-primary rounded-full relative z-10 shadow-[0_0_30px_#A60F1F] flex items-center justify-center">
-                  <div className="w-2 h-2 bg-white rounded-full" />
-                </div>
-                <div className="text-center group-hover:translate-y-[-10px] transition-transform">
-                  <span className="font-display text-3xl tracking-[0.6em] text-white block uppercase">Puebla</span>
-                  <span className="text-[10px] text-primary uppercase tracking-[0.5em] mt-2 block opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Ver en Google Maps</span>
-                </div>
-             </div>
+            <div className="flex flex-col items-center gap-6">
+              <div className="w-16 h-16 bg-primary rounded-full animate-ping absolute opacity-10" />
+              <div className="w-6 h-6 bg-primary rounded-full relative z-10 shadow-[0_0_30px_#A60F1F] flex items-center justify-center">
+                <div className="w-2 h-2 bg-white rounded-full" />
+              </div>
+              <div className="text-center group-hover:translate-y-[-10px] transition-transform">
+                <span className="font-display text-3xl tracking-[0.6em] text-white block uppercase">Puebla</span>
+                <span className="text-[10px] text-primary uppercase tracking-[0.5em] mt-2 block opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Ver en Google Maps</span>
+              </div>
+            </div>
           </div>
         </motion.a>
       </section>
+
+      {/* WHATSAPP FLOAT */}
+      <motion.a
+        href="https://wa.me/522223028042"
+        target="_blank"
+        rel="noopener noreferrer"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        className="fixed bottom-6 right-6 sm:bottom-10 sm:right-10 w-12 h-12 sm:w-16 sm:h-16 bg-[#25D366] rounded-full flex items-center justify-center shadow-2xl z-40"
+      >
+        <Phone size={24} className="text-white fill-current" />
+      </motion.a>
     </div>
   );
 }
+
