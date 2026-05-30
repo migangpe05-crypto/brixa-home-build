@@ -1,50 +1,9 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { Shield, Target, Award, Infinity, Users } from 'lucide-react';
-import { useRef, useEffect, useState } from 'react';
 import nosotrosHero from '../assets/images/nosotros_premium_drone_shot_final_1779400154815.png';
 import historyBg from '../assets/images/brixa_history_construction_replicated_1779490894094.png';
 import missionBg from '../assets/images/brixa_mission_construction_1779488942951.png';
 import visionBg from '../assets/images/brixa_vision_cityscape_ultra_real_clean_1779504261648.png';
-
-const AnimatedNumber = ({ value }: { value: string }) => {
-  const nodeRef = useRef<HTMLSpanElement>(null);
-  const [displayValue, setDisplayValue] = useState(0);
-  const [started, setStarted] = useState(false);
-  const numericValue = parseInt(value) || 0;
-  const suffix = value.replace(/[0-9]/g, '');
-
-  useEffect(() => {
-    const el = nodeRef.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !started) {
-          setStarted(true);
-        }
-      },
-      { threshold: 0 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!started) return;
-    const duration = 2000;
-    const startTime = performance.now();
-    const tick = (now: number) => {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setDisplayValue(Math.floor(eased * numericValue));
-      if (progress < 1) requestAnimationFrame(tick);
-      else setDisplayValue(numericValue);
-    };
-    requestAnimationFrame(tick);
-  }, [started, numericValue]);
-
-  return <span ref={nodeRef}>{displayValue}{suffix}</span>;
-};
 
 const stats = [
   { label: 'Proyectos Realizados', value: '75+', icon: <Target className="text-primary" /> },
@@ -181,7 +140,7 @@ export default function Nosotros() {
                   </div>
                   <div className="text-center">
                     <div className="text-xl sm:text-3xl md:text-4xl font-display text-white">
-                      <AnimatedNumber value={stat.value} />
+                      {stat.value}
                     </div>
                     <div className="text-[8px] sm:text-xs uppercase tracking-[0.1em] sm:tracking-[0.2em] text-gray-metallic mt-1">{stat.label}</div>
                   </div>
