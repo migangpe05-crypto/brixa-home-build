@@ -124,7 +124,7 @@ export default function Servicios() {
               className="relative group p-6 sm:p-10 lg:p-16 bg-dark transition-all duration-500 overflow-hidden"
             >
               {/* Imagen siempre visible en móvil, hover en escritorio */}
-              <div className="absolute inset-0 opacity-20 md:opacity-0 md:group-hover:opacity-40 pointer-events-none transition-opacity duration-700">
+              <div className="absolute inset-0 opacity-20 md:opacity-0 group-hover:opacity-40 pointer-events-none transition-opacity duration-700">
                 <img 
                   src={service.img} 
                   className="w-full h-full object-cover" 
