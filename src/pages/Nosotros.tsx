@@ -22,7 +22,7 @@ const AnimatedNumber = ({ value }: { value: string }) => {
           setStarted(true);
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0 }
     );
     observer.observe(el);
     return () => observer.disconnect();
