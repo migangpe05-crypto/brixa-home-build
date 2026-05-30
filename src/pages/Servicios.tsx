@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from 'motion/react';
-import { Home, Building2, Hammer, Settings, TreePine, ArrowUpRight, Compass, Layers } from 'lucide-react';
+import { Home, Building2, Hammer, Settings, TreePine, ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import serviciosHero from '../assets/images/servicios_construction_drone_final_1779400171800.png';
 import imgDesarrollo from '../assets/images/brixa_finished_house_replicated_1779490909196.png';
 import imgRemodelacion from '../assets/images/brixa_history_construction_replicated_1779490894094.png';
@@ -57,26 +58,12 @@ export default function Servicios() {
           className="absolute inset-0 z-0"
         >
           <motion.div
-            animate={{ 
-              x: [20, -20],
-              y: [-10, 10],
-              rotate: [-0.5, 0.5],
-              scale: [1.15, 1.25, 1.15]
-            }}
-            transition={{ 
-              duration: 20, 
-              repeat: Infinity, 
-              ease: "easeInOut" 
-            }}
+            animate={{ x: [20, -20], y: [-10, 10], rotate: [-0.5, 0.5], scale: [1.15, 1.25, 1.15] }}
+            transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
             className="w-full h-full"
           >
-            <img 
-              src={serviciosHero}
-              className="w-full h-full object-cover brightness-[0.7] contrast-[1.1]"
-              alt="Brixa 3D Architectural Detail"
-            />
+            <img src={serviciosHero} className="w-full h-full object-cover brightness-[0.7] contrast-[1.1]" alt="Brixa 3D Architectural Detail" />
           </motion.div>
-          
           <div className="absolute inset-0 bg-gradient-to-b from-dark/60 via-transparent to-dark" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(0,0,0,0.8)_100%)]" />
         </motion.div>
@@ -98,7 +85,6 @@ export default function Servicios() {
                 SOLUCIONES
               </motion.span>
             </div>
-            
             <div className="mb-10 md:mb-16 relative">
               <motion.h1 
                 initial={{ y: 100, opacity: 0 }}
@@ -109,7 +95,6 @@ export default function Servicios() {
                 SERVICIOS
               </motion.h1>
             </div>
-            
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
@@ -117,13 +102,9 @@ export default function Servicios() {
               className="space-y-8 md:space-y-16"
             >
               <div className="space-y-4 md:space-y-10 border-l-[1px] border-primary/40 pl-6 md:pl-12">
-                <p className="font-display text-sm sm:text-base md:text-3xl text-white/70 tracking-[0.3em] uppercase max-w-3xl leading-snug italic">
-                  PREMIUM
-                </p>
+                <p className="font-display text-sm sm:text-base md:text-3xl text-white/70 tracking-[0.3em] uppercase max-w-3xl leading-snug italic">PREMIUM</p>
                 <div className="w-16 sm:w-24 h-[1px] bg-primary animate-pulse shadow-[0_0_10px_#A60F1F]" />
-                <p className="text-white/40 tracking-[0.3em] sm:tracking-[0.5em] text-[8px] sm:text-xs uppercase max-w-md font-mono line-clamp-2 sm:line-clamp-none">
-                  ARQUITECTURA TÉCNICA Y EJECUCIÓN MAGISTRAL
-                </p>
+                <p className="text-white/40 tracking-[0.3em] sm:tracking-[0.5em] text-[8px] sm:text-xs uppercase max-w-md font-mono">ARQUITECTURA TÉCNICA Y EJECUCIÓN MAGISTRAL</p>
               </div>
             </motion.div>
           </motion.div>
@@ -138,29 +119,25 @@ export default function Servicios() {
               key={service.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{ 
-                backgroundColor: 'rgba(166, 15, 31, 0.05)',
-                y: -10 
-              }}
-              animate={{ 
-                y: [0, -5, 0] 
-              }}
               viewport={{ once: true }}
-              transition={{ 
-                y: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: idx * 0.8 },
-                opacity: { duration: 0.5, delay: idx * 0.05, ease: [0.16, 1, 0.3, 1] },
-                duration: 0.4 
-              }}
+              transition={{ opacity: { duration: 0.5, delay: idx * 0.05 }, duration: 0.4 }}
               className="relative group p-6 sm:p-10 lg:p-16 bg-dark transition-all duration-500 overflow-hidden"
             >
+              {/* Imagen siempre visible en móvil, hover en escritorio */}
+              <div className="absolute inset-0 opacity-20 md:opacity-0 md:group-hover:opacity-40 pointer-events-none transition-opacity duration-700">
+                <img 
+                  src={service.img} 
+                  className="w-full h-full object-cover" 
+                  alt={service.title} 
+                />
+              </div>
+
               <div className="relative z-10 space-y-6 sm:space-y-8">
                 <div className="p-3 sm:p-4 bg-primary/10 inline-block border border-primary/20">
                   {service.icon}
                 </div>
                 <h3 className="text-xl sm:text-2xl lg:text-3xl uppercase leading-tight tracking-tight max-w-xs">{service.title}</h3>
-                <p className="text-white/80 font-content leading-relaxed max-w-sm text-xs sm:text-sm">
-                  {service.description}
-                </p>
+                <p className="text-white/80 font-content leading-relaxed max-w-sm text-xs sm:text-sm">{service.description}</p>
                 <ul className="space-y-2 sm:space-y-3">
                   {service.details?.map((detail, dIdx) => (
                     <li key={dIdx} className="flex items-center gap-2 sm:gap-3 text-[8px] sm:text-[10px] text-gray-metallic font-mono uppercase tracking-wider">
@@ -169,17 +146,12 @@ export default function Servicios() {
                     </li>
                   ))}
                 </ul>
-                <button className="flex items-center gap-3 text-white/40 group-hover:text-primary transition-all text-[8px] sm:text-[10px] uppercase tracking-[0.3em] font-mono">
-                  Consultar Proyecto <ArrowUpRight size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                </button>
-              </div>
-
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-40 pointer-events-none transition-opacity duration-700">
-                <img 
-                  src={service.img} 
-                  className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-1000" 
-                  alt={service.title} 
-                />
+                <Link 
+                  to="/contacto"
+                  className="flex items-center gap-3 text-white/40 group-hover:text-primary transition-all text-[8px] sm:text-[10px] uppercase tracking-[0.3em] font-mono"
+                >
+                  Cotizar <ArrowUpRight size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </Link>
               </div>
             </motion.div>
           ))}
@@ -230,15 +202,8 @@ export default function Servicios() {
               </motion.a>
             </div>
             <motion.div 
-              animate={{
-                y: [-20, 20],
-                rotate: [-1, 1]
-              }}
-              transition={{
-                duration: 10,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
+              animate={{ y: [-20, 20], rotate: [-1, 1] }}
+              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
               className="flex-1 order-1 lg:order-2 relative aspect-[4/3] w-full overflow-hidden"
             >
               <img 
