@@ -17,12 +17,19 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    
+    const nombre = (e.currentTarget as HTMLFormElement).querySelector<HTMLInputElement>('input[type="text"]')?.value || '';
+    const whatsapp = (e.currentTarget as HTMLFormElement).querySelector<HTMLInputElement>('input[type="tel"]')?.value || '';
+    const descripcion = (e.currentTarget as HTMLFormElement).querySelector('textarea')?.value || '';
+    
+    const mensaje = `Hola BRIXA HOME & BUILD, me interesa cotizar un proyecto.%0A%0A*Nombre:* ${nombre}%0A*WhatsApp:* ${whatsapp}%0A*Descripción:* ${descripcion}`;
+    
     setTimeout(() => {
       setIsSubmitting(false);
-      alert('Propuesta recibida. Analizando viabilidad técnica...');
       onClose();
       setStep(1);
-    }, 2000);
+      window.open(`https://wa.me/522223028042?text=${mensaje}`, '_blank');
+    }, 1500);
   };
 
   return (
