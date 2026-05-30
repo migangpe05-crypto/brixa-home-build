@@ -9,7 +9,7 @@ const stats = [
   { label: 'Proyectos Realizados', value: '75+', icon: <Target className="text-primary" /> },
   { label: 'Clientes Satisfechos', value: '48+', icon: <Users className="text-primary" /> },
   { label: 'Años de Experiencia', value: '8', icon: <Infinity className="text-primary" /> },
-  { label: 'Proyectos Premium', value: '20+', icon: <Award className="text-primary" /> },
+  { label: 'Proyectos Premium', value: 'MÁS DE 20', icon: <Award className="text-primary" /> },
 ];
 
 export default function Nosotros() {
