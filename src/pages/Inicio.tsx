@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from 'motion/react';
-import { ChevronDown, Globe, Cpu, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import cyberHero from '../assets/images/brixa_cyber_hero_cinematic_1779247366665.png';
 import groundedHero from '../assets/images/brixa_grounded_hero_v2_1779246974147.png';
@@ -13,6 +13,17 @@ export default function Inicio() {
 
   const cityScale = useTransform(scrollYProgress, [0.1, 0.4], [1.1, 1]);
   const cityOpacity = useTransform(scrollYProgress, [0.1, 0.3], [0, 1]);
+
+  const handleCotizar = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const nombre = (form.elements.namedItem('nombre') as HTMLInputElement).value;
+    const telefono = (form.elements.namedItem('telefono') as HTMLInputElement).value;
+    const servicio = (form.elements.namedItem('servicio') as HTMLSelectElement).value;
+    const mensaje = (form.elements.namedItem('mensaje') as HTMLTextAreaElement).value;
+    const text = `Hola BRIXA, me interesa cotizar:%0ANombre: ${nombre}%0ATeléfono: ${telefono}%0AServicio: ${servicio}%0AMensaje: ${mensaje}`;
+    window.open(`https://wa.me/522221234567?text=${text}`, '_blank');
+  };
 
   return (
     <div className="relative overflow-hidden bg-dark">
@@ -48,72 +59,156 @@ export default function Inicio() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,transparent,rgba(0,0,0,0.8))]" />
         </motion.div>
 
-        {/* Hero Content - Standardized alignment and margins with top offset */}
+        {/* Hero Content */}
         <div className="relative z-20 w-full max-w-7xl mx-auto flex items-center h-full px-8 pt-48 md:pt-80">
-          <motion.div
-            initial={{ opacity: 0, x: -60 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full"
-          >
-            <div className="mb-4 md:mb-6 overflow-hidden">
-              <motion.span 
-                initial={{ y: 50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="block font-display text-lg sm:text-xl md:text-3xl lg:text-4xl leading-none text-white tracking-[0.4em] md:tracking-[0.7em] uppercase opacity-40 mb-4"
-              >
-                CONSTRUIMOS
-              </motion.span>
-            </div>
-            
-            <div className="mb-10 md:mb-16 relative">
-              <motion.h1 
-                initial={{ y: 100, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.2, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                className="font-display text-4xl sm:text-6xl md:text-[8rem] lg:text-[10rem] xl:text-[12rem] leading-[0.8] text-primary tracking-tighter italic"
-              >
-                VALOR
-              </motion.h1>
-            </div>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="space-y-8 md:space-y-16"
-            >
-              <div className="space-y-4 md:space-y-10 border-l-[1px] border-primary/40 pl-6 md:pl-12">
-                <p className="font-display text-sm sm:text-base md:text-3xl text-white/70 tracking-[0.3em] uppercase max-w-3xl leading-snug">
-                  DESARROLLAMOS FUTURO
-                </p>
-              </div>
+          <div className="w-full flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-12">
 
-              <div className="flex flex-col sm:flex-row gap-4 sm:gap-10 pl-6 md:pl-12">
-                <Link 
-                  to="/servicios" 
-                  className="group relative px-10 md:px-16 py-5 md:py-6 bg-primary text-white overflow-hidden transition-all duration-500 hover:shadow-[0_0_40px_rgba(166,15,31,0.3)] active:scale-95 text-center"
+            {/* LEFT: Mensaje principal */}
+            <motion.div
+              initial={{ opacity: 0, x: -60 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+              className="flex-1"
+            >
+              {/* Logotipo BRIXA HOME & BUILD */}
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.05, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="mb-6 md:mb-8"
+              >
+                <div className="flex flex-col leading-none">
+                  <span className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white tracking-[0.25em] uppercase font-bold">
+                    BRIXA
+                  </span>
+                  <span className="font-display text-xs sm:text-sm md:text-base lg:text-lg text-white/60 tracking-[0.55em] uppercase font-light mt-1">
+                    HOME &amp; BUILD
+                  </span>
+                </div>
+              </motion.div>
+
+              <div className="mb-4 md:mb-6 overflow-hidden">
+                <motion.span 
+                  initial={{ y: 50, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  className="block font-display text-lg sm:text-xl md:text-3xl lg:text-4xl leading-none text-white tracking-[0.4em] md:tracking-[0.7em] uppercase opacity-40 mb-4"
                 >
-                  <motion.div
-                    className="absolute inset-0 bg-[#25D366] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  />
-                  <span className="relative z-10 font-display text-lg md:text-xl tracking-[0.3em] uppercase">Explorar Proyectos</span>
-                </Link>
-                <Link 
-                  to="/nosotros" 
-                  className="group relative px-10 md:px-16 py-5 md:py-6 bg-primary text-white overflow-hidden transition-all duration-500 active:scale-95 text-center"
+                  CONSTRUIMOS
+                </motion.span>
+              </div>
+              
+              <div className="mb-8 md:mb-12 relative">
+                <motion.h1 
+                  initial={{ y: 100, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.2, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                  className="font-display text-4xl sm:text-6xl md:text-[8rem] lg:text-[9rem] xl:text-[10rem] leading-[0.8] text-primary tracking-tighter italic"
                 >
-                  <motion.div
-                    className="absolute inset-0 bg-[#25D366] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  />
-                  <span className="relative z-10 font-display text-lg md:text-xl tracking-[0.3em] uppercase transition-colors">QUIÉNES SOMOS</span>
-                </Link>
+                  VALOR
+                </motion.h1>
+              </div>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <div className="border-l-[1px] border-primary/40 pl-6 md:pl-12">
+                  <p className="font-display text-sm sm:text-base md:text-3xl text-white/70 tracking-[0.3em] uppercase max-w-3xl leading-snug">
+                    DESARROLLAMOS FUTURO
+                  </p>
+                </div>
+              </motion.div>
+            </motion.div>
+
+            {/* RIGHT: Formulario Glassmorphism */}
+            <motion.div
+              initial={{ opacity: 0, x: 60 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="w-full lg:w-[340px] xl:w-[380px] shrink-0"
+            >
+              <div
+                style={{
+                  background: 'rgba(10, 10, 10, 0.65)',
+                  backdropFilter: 'blur(20px)',
+                  WebkitBackdropFilter: 'blur(20px)',
+                  border: '1px solid rgba(192, 0, 0, 0.18)',
+                  boxShadow: '0 8px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04)',
+                }}
+                className="rounded-sm p-6 md:p-8"
+              >
+                {/* Título formulario */}
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-4 h-[2px] bg-primary" />
+                  <span className="font-display text-xs tracking-[0.35em] uppercase text-white/80">
+                    Cotiza tu proyecto
+                  </span>
+                </div>
+
+                <form onSubmit={handleCotizar} className="space-y-4">
+                  <div>
+                    <label className="block text-[10px] tracking-[0.3em] uppercase text-white/40 mb-1 font-display">Nombre</label>
+                    <input
+                      name="nombre"
+                      type="text"
+                      placeholder="Tu nombre"
+                      required
+                      className="w-full bg-white/5 border border-white/10 text-white text-sm px-4 py-2.5 rounded-sm placeholder-white/20 focus:outline-none focus:border-primary/50 transition-colors duration-300"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] tracking-[0.3em] uppercase text-white/40 mb-1 font-display">Teléfono</label>
+                    <input
+                      name="telefono"
+                      type="tel"
+                      placeholder="222 000 0000"
+                      required
+                      className="w-full bg-white/5 border border-white/10 text-white text-sm px-4 py-2.5 rounded-sm placeholder-white/20 focus:outline-none focus:border-primary/50 transition-colors duration-300"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] tracking-[0.3em] uppercase text-white/40 mb-1 font-display">Servicio</label>
+                    <select
+                      name="servicio"
+                      required
+                      className="w-full bg-[#111] border border-white/10 text-white/70 text-sm px-4 py-2.5 rounded-sm focus:outline-none focus:border-primary/50 transition-colors duration-300 appearance-none"
+                    >
+                      <option value="" disabled selected>Selecciona un servicio</option>
+                      <option value="Construcción">Construcción</option>
+                      <option value="Remodelación">Remodelación</option>
+                      <option value="Diseño de interiores">Diseño de interiores</option>
+                      <option value="Ingeniería estructural">Ingeniería estructural</option>
+                      <option value="Otro">Otro</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] tracking-[0.3em] uppercase text-white/40 mb-1 font-display">Mensaje</label>
+                    <textarea
+                      name="mensaje"
+                      placeholder="Breve descripción..."
+                      rows={3}
+                      className="w-full bg-white/5 border border-white/10 text-white text-sm px-4 py-2.5 rounded-sm placeholder-white/20 focus:outline-none focus:border-primary/50 transition-colors duration-300 resize-none"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full bg-primary text-white font-display text-xs tracking-[0.3em] uppercase py-3 px-6 hover:bg-primary/90 transition-colors duration-300 flex items-center justify-center gap-3 group mt-2"
+                  >
+                    Cotizar Ahora
+                    <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-300" />
+                  </button>
+                </form>
               </div>
             </motion.div>
-          </motion.div>
-        </div>
 
+          </div>
+        </div>
       </section>
 
       {/* SECTION 2: LUXURY DEVELOPMENT REVEAL */}
