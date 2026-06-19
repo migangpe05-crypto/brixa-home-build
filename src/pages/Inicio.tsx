@@ -1,6 +1,8 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import DROSection from '../components/DROSection';
+import BrandingSection from '../components/BrandingSection';
 import cyberHero from '../assets/images/brixa_cyber_hero_cinematic_1779247366665.png';
 import groundedHero from '../assets/images/brixa_grounded_hero_v2_1779246974147.png';
 import structuralPrecision from '../assets/images/brixa_structural_precision_clean_v3_1779511204879.png';
@@ -308,7 +310,12 @@ export default function Inicio() {
             </div>
           </div>
         </div>
-      </section>
+           </section>
+
+      <DROSection />
+
+      <BrandingSection />
+
     </div>
   );
 }
