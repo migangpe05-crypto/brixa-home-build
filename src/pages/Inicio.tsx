@@ -38,12 +38,6 @@ export default function Inicio() {
         <div className="relative z-20 w-full max-w-7xl mx-auto flex items-center h-full px-8 pt-48 md:pt-80">
           <div className="w-full flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-12">
             <motion.div initial={{ opacity: 0, x: -60 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} className="flex-1">
-              <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05, duration: 0.8, ease: [0.16, 1, 0.3, 1] }} className="mb-6 md:mb-8">
-                <div className="flex flex-col leading-none">
-                  <span className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white tracking-[0.25em] uppercase font-bold">BRIXA</span>
-                  <span className="font-display text-xs sm:text-sm md:text-base lg:text-lg text-white/60 tracking-[0.55em] uppercase font-light mt-1">HOME &amp; BUILD</span>
-                </div>
-              </motion.div>
               <div className="mb-4 md:mb-6 overflow-hidden">
                 <motion.span initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }} className="block font-display text-lg sm:text-xl md:text-3xl lg:text-4xl leading-none text-white tracking-[0.4em] md:tracking-[0.7em] uppercase opacity-40 mb-4">
                   CONSTRUIMOS
