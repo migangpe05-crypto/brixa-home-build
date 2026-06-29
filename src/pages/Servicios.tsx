@@ -46,7 +46,7 @@ const services = [
     title: 'DRO - Dirección Responsable de Obra',
     description: 'Respaldo técnico y legal en cada etapa del proyecto. Garantizamos seguridad, calidad y cumplimiento normativo desde el diseño hasta la entrega.',
     icon: <ShieldCheck className="w-10 h-10 text-primary" />,
-    img: imgComercial,
+    img: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80',
     details: ['Responsiva de Obra', 'Revisión y Validación de Proyectos', 'Supervisión Técnica e Institucional', 'Cumplimiento Normativo y Legal', 'Gestión de Trámites y Licencias', 'Detección y Mitigación de Riesgos', 'Asesoría Técnica Especializada']
   },
   {
@@ -54,7 +54,7 @@ const services = [
     title: 'Logotipos y Branding Empresarial',
     description: 'Diseño y fabricación de logotipos profesionales en madera, aluminio y con luz LED. Identidad visual que posiciona tu marca.',
     icon: <Layers className="w-10 h-10 text-primary" />,
-    img: imgCarpinteria,
+    img: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800&q=80',
     details: ['Logotipos en Madera', 'Logotipos en Aluminio', 'Logotipos con Luz LED', 'Conceptualización de Logotipos', 'Estrategia de Branding Empresarial']
   },
 ]
@@ -106,7 +106,7 @@ export default function Servicios() {
               className="relative group p-6 sm:p-10 lg:p-16 bg-dark transition-all duration-500 overflow-hidden"
             >
               <div className="absolute inset-0 opacity-20 md:opacity-0 group-hover:opacity-40 pointer-events-none transition-opacity duration-700">
-                <img src={service.img} className="w-full h-full object-cover" alt={service.title} />
+                <img src={typeof service.img === 'string' ? service.img : service.img} className="w-full h-full object-cover" alt={service.title} />
               </div>
               <div className="relative z-10 space-y-6 sm:space-y-8">
                 <div className="p-3 sm:p-4 bg-primary/10 inline-block border border-primary/20">{service.icon}</div>
