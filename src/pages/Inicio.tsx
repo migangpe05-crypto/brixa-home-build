@@ -185,6 +185,19 @@ export default function Inicio() {
                       <option value="Diseño de interiores">Diseño de interiores</option>
                       <option value="Ingeniería estructural">Ingeniería estructural</option>
                       <option value="Otro">Otro</option>
+<option disabled>── DRO - Dirección Responsable de Obra ──</option>
+<option value="Responsiva de Obra">Responsiva de Obra</option>
+<option value="Revisión y Validación de Proyectos">Revisión y Validación de Proyectos</option>
+<option value="Supervisión de Obra Técnica e Institucional">Supervisión de Obra Técnica e Institucional</option>
+<option value="Cumplimiento Normativo y Legal">Cumplimiento Normativo y Legal</option>
+<option value="Gestión de Trámites y Licencias">Gestión de Trámites y Licencias</option>
+<option value="Detección y Mitigación de Riesgos">Detección y Mitigación de Riesgos</option>
+<option value="Asesoría Técnica Especializada">Asesoría Técnica Especializada</option>
+<option disabled>── Branding e Identidad Corporativa ──</option>
+<option value="Diseño de Logotipos">Diseño y Conceptualización de Logotipos</option>
+<option value="Identidad Visual Integral">Desarrollo de Identidad Visual Integral</option>
+<option value="Branding Empresarial">Estrategia de Branding Empresarial</option>
+<option value="Personalización Corporativa">Personalización Corporativa de Elementos Digitales</option>
                     </select>
                   </div>
 
