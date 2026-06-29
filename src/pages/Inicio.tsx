@@ -1,7 +1,6 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import BrandingSection from '../components/BrandingSection';
 import cyberHero from '../assets/images/brixa_cyber_hero_cinematic_1779247366665.png';
 import groundedHero from '../assets/images/brixa_grounded_hero_v2_1779246974147.png';
 import structuralPrecision from '../assets/images/brixa_structural_precision_clean_v3_1779511204879.png';
@@ -81,13 +80,13 @@ export default function Inicio() {
                     <label className="block text-[10px] tracking-[0.3em] uppercase text-white/40 mb-1 font-display">Servicio</label>
                     <select name="servicio" required className="w-full bg-[#111] border border-white/10 text-white/70 text-sm px-4 py-2.5 rounded-sm focus:outline-none focus:border-primary/50 transition-colors duration-300 appearance-none">
                       <option value="" disabled>Selecciona un servicio</option>
-                      <option disabled className="text-white/30">── Construcción ──</option>
+                      <option disabled>── Construcción ──</option>
                       <option value="Construcción">Construcción</option>
                       <option value="Remodelación">Remodelación</option>
                       <option value="Diseño de interiores">Diseño de interiores</option>
                       <option value="Ingeniería estructural">Ingeniería estructural</option>
                       <option value="Otro">Otro</option>
-                      <option disabled className="text-white/30">── DRO - Dirección Responsable de Obra ──</option>
+                      <option disabled>── DRO - Dirección Responsable de Obra ──</option>
                       <option value="Responsiva de Obra">Responsiva de Obra</option>
                       <option value="Revisión y Validación de Proyectos">Revisión y Validación de Proyectos</option>
                       <option value="Supervisión de Obra Técnica e Institucional">Supervisión de Obra Técnica e Institucional</option>
@@ -95,9 +94,9 @@ export default function Inicio() {
                       <option value="Gestión de Trámites y Licencias">Gestión de Trámites y Licencias</option>
                       <option value="Detección y Mitigación de Riesgos">Detección y Mitigación de Riesgos</option>
                       <option value="Asesoría Técnica Especializada">Asesoría Técnica Especializada</option>
-                      <option disabled className="text-white/30">── Logotipos y Branding ──</option>
-                      <option value="Diseño de Logotipos en Madera">Logotipos en Madera</option>
-                      <option value="Diseño de Logotipos en Aluminio">Logotipos en Aluminio</option>
+                      <option disabled>── Logotipos y Branding ──</option>
+                      <option value="Logotipos en Madera">Logotipos en Madera</option>
+                      <option value="Logotipos en Aluminio">Logotipos en Aluminio</option>
                       <option value="Logotipos con Luz LED">Logotipos con Luz LED</option>
                       <option value="Conceptualización de Logotipos Profesionales">Conceptualización de Logotipos Profesionales</option>
                       <option value="Estrategia de Branding Empresarial">Estrategia de Branding Empresarial</option>
@@ -168,9 +167,6 @@ export default function Inicio() {
           </div>
         </div>
       </section>
-
-      <BrandingSection />
-
     </div>
   );
 }
